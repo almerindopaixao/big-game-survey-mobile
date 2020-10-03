@@ -77,7 +77,7 @@ const CreateRecord = () => {
     }
 
     useEffect(() => {
-        Axios.get(URL_GAMES + 'cfdfdf')
+        Axios.get(URL_GAMES)
             .then((response) => {
                 const selectValue = mapSelectValue(response.data);
                 setAllGames(selectValue);
