@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Alert } from 'react-native';
+import { View, TextInput, Alert, Text } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { FontAwesome5 as Icon } from '@expo/vector-icons';
+import { RectButton } from 'react-native-gesture-handler';
 
 import Header from '../../components/Header';
 import PlatformCard from './PlatformCard';
 
 import Axios from '../../services/Axios';
-import { URL_GAMES } from '../../config/urls';
+import { URL_GAMES, URL_RECORDS } from '../../config/urls';
 
-import { GamePlatform, Game } from './types';
+import { GamePlatform, Game, Data } from './types';
 
 import styles from './styles';
 
@@ -28,6 +29,11 @@ const mapSelectValue = (games: Game[]) => {
 
 const CreateRecord = () => {
 
+    const [data, setData] = useState<Data>({
+        name: '',
+        age: '',
+        game_id: null,
+    });
     const [platform, setPlatform] = useState<GamePlatform>();
     const [selectedGame, setSelectedGame] = useState<string>('');
     const [allGames, setAllGames] = useState<Game[]>([]);
@@ -42,14 +48,41 @@ const CreateRecord = () => {
         setFilteredGames(gamesByPlatform);
     }
 
+    const handleSubmit = () =>  {
+
+        if (selectedGame === '') {
+            Alert.alert('Por favor selecione um game');
+            return;
+        }
+
+        if (data.age === '') {
+            Alert.alert('Por favor, digite sua idade');
+            return;
+        }
+
+        const payload = { name: data.name, age: Number(data.age), game_id: Number(selectedGame)}
+        
+        Axios.post(URL_RECORDS, payload)
+            .then(() => { 
+                Alert.alert('Dados salvos com sucesso') 
+                setData({
+                    name: '',
+                    age: '',
+                    game_id: null
+                });
+                setSelectedGame('');
+                setPlatform(undefined);
+            })
+            .catch(() => Alert.alert('Desculpe, não conseguimos salvar os dados :('));
+    }
+
     useEffect(() => {
-        Axios.get(URL_GAMES)
+        Axios.get(URL_GAMES + 'cfdfdf')
             .then((response) => {
                 const selectValue = mapSelectValue(response.data);
-                console.log(selectValue);
                 setAllGames(selectValue);
             })
-            .catch((e) => Alert.alert(`Erro Inesperado ${e}`));
+            .catch(() => Alert.alert(`Erro ao listar jogos`));
     }, []);
 
     return (
@@ -57,11 +90,21 @@ const CreateRecord = () => {
             <Header />
             <View style={styles.container}>
                 <TextInput 
+                    value={data.name}
+                    onChangeText={(text) => setData({
+                        ...data,
+                        name: text,
+                    })}
                     placeholder="Nome" 
                     style={styles.inputText} 
                     placeholderTextColor="#9e9e9e"
                 />
                 <TextInput 
+                    value={data.age}
+                    onChangeText={(text) => setData({
+                        ...data,
+                        age: text,
+                    })}
                     keyboardType="numeric"
                     placeholder="Idade" 
                     style={styles.inputText} 
@@ -128,6 +171,13 @@ const CreateRecord = () => {
                     }}
                     Icon={() => <Icon name="chevron-down" color="#9e9e9e" size={25} />}
                 />
+                <View style={styles.footer}>
+                    <RectButton style={styles.button} onPress={handleSubmit}>
+                        <Text style={styles.buttonText}>
+                            SALVAR
+                        </Text>
+                    </RectButton>
+                </View>
             </View>
         </>
     );
