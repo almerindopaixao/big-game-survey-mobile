@@ -2,13 +2,13 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        marginTop:  '10%',
+        marginTop:  '15%',
         backgroundColor: '#0B1F34',
         alignItems: 'center',
       },
       gamerImage: {
-        width: 228,
-        height: 214
+        width: 315,
+        height: 295,
       },
       title: {
         color: '#00D4FF',

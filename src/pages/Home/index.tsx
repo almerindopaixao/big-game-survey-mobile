@@ -2,6 +2,9 @@ import React from 'react';
 import { FontAwesome5 as Icon } from '@expo/vector-icons'
 import { Text, View, Image , Alert} from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+
+import Header from '../../components/Header';
 
 import Gamer from '../../assets/images/gamer.png';
 
@@ -9,12 +12,15 @@ import styles from './styles';
 
 const Home = () => {
 
+    const { navigate } = useNavigation();
+
     const HandleOnPress = (): void => {
-        Alert.alert('Você clicou no botão');
+        navigate('CreateRecord')
     }
 
     return (
-        <>
+        <>  
+            <Header />
             <View style={styles.container}>
                 <Image 
                     source={Gamer} 
