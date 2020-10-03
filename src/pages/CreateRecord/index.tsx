@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Alert, Text } from 'react-native';
+import { View, TextInput, Alert, Text, ScrollView } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { FontAwesome5 as Icon } from '@expo/vector-icons';
 import { RectButton } from 'react-native-gesture-handler';
@@ -86,7 +86,7 @@ const CreateRecord = () => {
     }, []);
 
     return (
-        <>  
+        <ScrollView>  
             <Header />
             <View style={styles.container}>
                 <TextInput 
@@ -179,7 +179,7 @@ const CreateRecord = () => {
                     </RectButton>
                 </View>
             </View>
-        </>
+        </ScrollView>
     );
 }
 

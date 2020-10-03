@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     header: {
-        paddingTop: 50,
-        height: 90,
+        paddingTop: 35,
+        height: 80,
         backgroundColor: '#37474F',
         flexDirection: 'row',
         justifyContent: 'center'

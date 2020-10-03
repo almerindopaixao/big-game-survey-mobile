@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
       },
       footer: {
         marginTop: '15%',
+        marginBottom: '15%',
         alignItems: 'center'
       },
       button: {
