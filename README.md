@@ -1,6 +1,6 @@
 # big-game-survey-mobile
 
-Plataforma mobile desenvolvida em react-native com o intuito de coletar dados referentes à opnião de diversas pessoas relacionadas a alguns jogos e plataformas para uma base de dados que, posteriomente, poderão ser consultados em um site web.
+Plataforma mobile desenvolvida em react-native com o intuito de coletar dados referentes à opnião de diversas pessoas relacionadas a alguns jogos e plataformas para uma base de dados que, posteriomente, poderão ser consultados [Neste Site](https://biggamesurvey.vercel.app/)
 
 ### Download
 
